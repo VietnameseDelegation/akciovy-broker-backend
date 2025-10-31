@@ -5,18 +5,18 @@ import { User } from './user.entity';
 @Entity()
 export class Stock {
   @PrimaryGeneratedColumn()
-   @ApiProperty()
+  @ApiProperty({ example: 1, description: 'Unique ID of the stock record' })
   id: number;
 
-@ApiProperty()
   @Column()
+  @ApiProperty({ example: 'AAPL', description: 'Stock symbol (e.g. AAPL, TSLA, GOOGL)' })
   symbol: string;
 
   @Column('int')
-  @ApiProperty()
+  @ApiProperty({ example: 10, description: 'Number of shares owned' })
   quantity: number;
- @ApiProperty()
-  @ManyToOne(() => User, user => user.stocks)
-  user: User;  // This connects the stock to the user
-}
 
+  @ManyToOne(() => User, user => user.stocks)
+  @ApiProperty({ type: () => User, description: 'Owner of this stock' })
+  user: User;
+}
