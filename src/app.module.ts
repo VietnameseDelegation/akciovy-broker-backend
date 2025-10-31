@@ -3,6 +3,9 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoginModule } from './login/login.module';
 import { MoneyModule } from './money/money.module';
+import { StockController } from './stock/stock.controller';
+import { StockModule } from './stock/stock.module';
+import { ControllerService } from './controller/controller.service';
 
 @Module({
   imports: [
@@ -13,7 +16,10 @@ import { MoneyModule } from './money/money.module';
       autoLoadEntities: true, // automatically load entities from feature modules
     }),
     LoginModule,
-    MoneyModule, // only import the feature module here
+    MoneyModule,
+    StockModule, // only import the feature module here
   ],
+  controllers: [StockController],
+  providers: [ControllerService],
 })
 export class AppModule {}

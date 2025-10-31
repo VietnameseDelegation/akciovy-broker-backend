@@ -26,13 +26,18 @@ export class LoginController {
     },
   })
   
-  @ApiResponse({ status: 201, description: 'Uživatel vytvořen', type: User })
-  create(@Body('username') username: string, @Body('password') password: string) {
-    const user = new User();
-    user.username = username;
-    user.password = password;
-    return this.loginService.create(user);
-  }
+@ApiResponse({ status: 201, description: 'Uživatel vytvořen', type: User })
+@ApiResponse({ status: 400, description: 'Uživatel s tímto uživatelským jménem již existuje' })
+async create(@Body('username') username: string, @Body('password') password: string) {
+  // Check if user already exists
+
+  // Create new user
+  const user = new User();
+  user.username = username;
+  user.password = password;
+
+  return this.loginService.create(user);
+}
 
   @Delete('deleteUser')
   @ApiOperation({ summary: 'Smazat uživatele' })
