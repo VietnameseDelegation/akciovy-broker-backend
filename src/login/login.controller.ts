@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Delete } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { LoginService } from './login.service';
-import { User } from './user.entity';
+import { User } from '../entities/user.entity';
 
 @ApiTags('Login') // Groups endpoints in Swagger
 @Controller('login')
@@ -21,10 +21,11 @@ export class LoginController {
     schema: {
       example: {
         username: 'alice',
-        password: 'secret',
+        password: 'ggggg',
       },
     },
   })
+  
   @ApiResponse({ status: 201, description: 'Uživatel vytvořen', type: User })
   create(@Body('username') username: string, @Body('password') password: string) {
     const user = new User();

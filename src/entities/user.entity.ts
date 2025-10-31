@@ -7,11 +7,15 @@ export class User {
   @ApiProperty()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   @ApiProperty()
   username: string;
   
   @Column()
   @ApiProperty()
   password: string;
+
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
+  @ApiProperty()
+  money: number;
 }
