@@ -11,6 +11,7 @@ export class MoneyController {
   @ApiOperation({ summary: 'Get current balance of a user' })
   @ApiQuery({ name: 'username', required: true, description: 'Username of the account' })
   @ApiResponse({ status: 200, description: 'Current balance returned', type: Number })
+  
   async getMoney(@Query('username') username: string) {
     return this.moneyService.getMoney(username);
   }
@@ -20,6 +21,7 @@ export class MoneyController {
   @ApiQuery({ name: 'username', required: true })
   @ApiQuery({ name: 'amount', required: true, description: 'Amount to add (positive number)' })
   @ApiResponse({ status: 200, description: 'Money added successfully', type: Number })
+
   async addMoney(
     @Query('username') username: string,
     @Query('amount') amount: string,
@@ -33,6 +35,7 @@ export class MoneyController {
   @ApiQuery({ name: 'username', required: true })
   @ApiQuery({ name: 'amount', required: true, description: 'Amount to remove (positive number)' })
   @ApiResponse({ status: 200, description: 'Money removed successfully', type: Number })
+
   async removeMoney(
     @Query('username') username: string,
     @Query('amount') amount: string,

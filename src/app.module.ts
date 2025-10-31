@@ -17,6 +17,6 @@ import { StockModule } from './stock/stock.module';
     LoginModule,
     MoneyModule,
     StockModule, // only import the feature module here
-  ],
+  ]
 })
 export class AppModule {}

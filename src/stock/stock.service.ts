@@ -57,4 +57,22 @@ export class StockService {
   return { username: user.username, newBalance: user.money, stock };
 }
 
+ async getPortfolio(username: string, currentPrices: Record<string, number>) {
+    const user = await this.userRepository.findOne({
+      where: { username },
+      relations: ['stocks'],
+    });
+    if (!user) throw new NotFoundException('User not found');
+
+    // Map each stock to include total value
+    const portfolio = user.stocks.map(stock => ({
+      symbol: stock.symbol,
+      quantity: stock.quantity,
+      currentPrice: currentPrices[stock.symbol] ?? 0, // current market price
+      totalValue: (currentPrices[stock.symbol] ?? 0) * stock.quantity,
+    }));
+
+    return { username: user.username, money: user.money, portfolio };
+  }
+
 }
