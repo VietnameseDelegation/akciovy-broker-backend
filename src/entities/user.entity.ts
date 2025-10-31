@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { Stock } from './stocks.entity';
 
 @Entity()
 export class User {
@@ -18,4 +19,7 @@ export class User {
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   @ApiProperty()
   money: number;
+
+  @OneToMany(() => Stock, stock => stock.user)
+stocks: Stock[];
 }
