@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Login API')
+    .setTitle('Broker API')
     .setDescription('API for managing users and logins')
     .setVersion('1.0')
     .build();
